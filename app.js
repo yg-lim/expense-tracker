@@ -12,7 +12,11 @@ app.use(morgan("common"));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.send("hello world");
+  res.redirect("/expenses");
+});
+
+app.get("/expenses", (req, res) => {
+  res.render("expenses");
 });
 
 app.listen(PORT, HOST, () => {

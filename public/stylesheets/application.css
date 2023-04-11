@@ -1,0 +1,192 @@
+@import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+  margin: 0;
+}
+
+html {
+  font-family: "Roboto Mono", monospace;
+  color: #454545;
+  font-size: 16px;
+}
+
+header {
+  max-width: 277px;
+  margin: 40px auto;
+}
+
+header div {
+  margin-bottom: 40px;
+}
+
+.flex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.gray {
+  color: #7D7D7D;
+}
+
+.subhead {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+a {
+  color: #47CB8C;
+  border-bottom: 1px solid #47CB8C;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.text-center {
+  text-align: center;
+}
+
+main {
+  max-width: 565px;
+  margin: 0 auto;
+}
+
+.form-section {
+  max-width: 373px;
+}
+
+input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  height: 2.4rem;
+}
+
+.margin-right {
+  margin-right: 1rem;
+}
+
+.margin-left {
+  margin-left: 1rem;
+}
+
+dt {
+  margin-bottom: 0.5rem;
+}
+
+dl {
+  margin-bottom: 1rem;
+}
+
+.new-expense-controls {
+  text-align: center;
+}
+
+button {
+  margin-top: 0.5rem;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 500;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.25rem;
+}
+
+.cta {
+  border: none;
+  background-color: #375CDD;
+  color: white;
+}
+
+.destructive {
+  border: none;
+  background-color: red;
+  color: white;
+}
+
+.body-2 {
+  font-size: 0.9rem;
+}
+
+section {
+  margin: 4rem auto;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 1rem 0;
+}
+
+.padding-vertical {
+  padding: 1rem 0;
+}
+
+.align-baseline {
+  align-items: baseline;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #DCDCDC;
+}
+
+.small-link {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.edit-expense-form {
+  max-width: 373px;
+  margin: 3rem auto;
+}
+
+.edit-expense-controls a {
+  border: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.flash li {
+  padding: 1rem;
+  margin: 1rem 0;
+  font-weight: 500;
+}
+
+.success {
+  color: green;
+  background-color: lightgreen;
+}
+
+.error {
+  color: darkred;
+  background-color: lightcoral;
+}
