@@ -8,12 +8,12 @@ html(lang="en")
     header
       block header
         div(class="flex space-between")
-          a(href="") Prev
-          h2(class="text-center") Month Year
-          a(href="") Next
+          a(href=`/expenses${getPrevMonthPath(year, month)}`) Prev
+          h2(class="text-center") #{monthToString(month)} #{year}
+          a(href=`/expenses${getNextMonthPath(year, month)}` class=(checkIsCurrentMonth(year, month) ? "hidden" : "")) Next
         div
           p(class="subhead gray text-center") Total Spending
-          h1(class="text-center") $100.00
+          h1(class="text-center") $#{getTotal(expenses)}
     main
       - let kinds = Object.keys(flash || {});
         if kinds.length > 0
@@ -23,38 +23,38 @@ html(lang="en")
                 li(class=kind)= message
       block main
         section(class="form-section")
-          form(action="/expenses" method="POST" class="new-expense-form") 
+          form(action=`/expenses/${year}/${month}` method="POST" class="new-expense-form") 
             fieldset(class="new-expense-text-inputs")
               dl
                 dt
                   label(for="description" class="body-2") Description of Expense
                 dd
-                  input(type="text" name="description" id="description")
+                  input(type="text" name="description" id="description" value=description)
               div(class="flex")
                 dl(class="margin-right")
                   dt
                     label(for="amount" class="body-2") Amount
                   dd
-                    input(type="number" name="amount" id="amount" min="0.01" step="0.01")
+                    input(type="number" name="amount" id="amount" min="0.01" step="0.01" value=amount)
                 dl(class="margin-left")
                   dt
                     label(for="date" class="body-2") Date (YYYY-MM-DD)
                   dd
-                    input(type="date" name="date" id="date")
+                    input(type="date" name="date" id="date" value=date)
             fieldset(class="new-expense-controls")
               button(class="cta") Add Expense
         section(class="expenses-section")
           h3(class="border-bottom") Expenses
-          if !expenses
+          if expenses.length === 0
             p(class="body-2 padding-vertical") No expenses for this month.
           else
             ul
               each expense in expenses
                 li(class="flex space-between padding-vertical align-center border-bottom")
                   div(class="flex align-center")
-                    p(class="body-2 text-center gray margin-right medium") Tue<br>26
-                    p(class="body-1") Description of expense
+                    p(class="body-2 text-center gray margin-right medium") #{getDay(expense.date)}<br>#{getDate(expense.date)}
+                    p(class="body-1")= expense.description
                   div(class="flex align-baseline")
-                    p(class="body-1 medium text-right") $10.00
-                    a(href=`/edit/${expense.id}` class="text-right margin-left small-link") Edit
+                    p(class="body-1 medium text-right")= `$${expense.amount}`
+                    a(href=`/expenses/edit/${expense.id}` class="text-right margin-left small-link") Edit
 
