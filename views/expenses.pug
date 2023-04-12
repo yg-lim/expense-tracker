@@ -57,4 +57,8 @@ html(lang="en")
                   div(class="flex align-baseline")
                     p(class="body-1 medium text-right")= `$${expense.amount}`
                     a(href=`/expenses/edit/${expense.id}` class="text-right margin-left small-link") Edit
-
+    block footer
+      footer
+        form(action="/signout" method="post" class="text-center signout-form")
+          input(type="hidden", name="signout" value="true")
+          button(class="destructive") Sign Out

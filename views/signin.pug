@@ -1,0 +1,22 @@
+extends expenses
+
+block header
+  h2(class="text-center") Sign In
+
+block main
+  form(action="/signin" method="post" class="signin-form")
+    fieldset
+      dl
+        dt
+          label(for="username" class="body-2") Username
+        dd
+          input(type="text" name="username" id="username" value=username)
+      dl
+        dt
+          label(for="password" class="body-2") Password
+        dd
+          input(type="password" name="password" id="password")
+    fieldset
+      button(class="cta") Sign In
+
+block footer

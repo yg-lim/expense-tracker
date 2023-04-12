@@ -99,6 +99,11 @@ dl {
   text-align: center;
 }
 
+.signin-form {
+  max-width: 373px;
+  margin: 0 auto;
+}
+
 button {
   margin-top: 0.5rem;
   font-family: 'Roboto Mono', monospace;
@@ -179,6 +184,7 @@ h3 {
   padding: 1rem;
   margin: 1rem 0;
   font-weight: 500;
+  border-radius: 0.25rem;
 }
 
 .success {
@@ -189,4 +195,13 @@ h3 {
 .error {
   color: darkred;
   background-color: lightcoral;
+}
+
+.info {
+  color: darkblue;
+  background-color: lightskyblue;
+}
+
+.signout-form {
+  margin-bottom: 3rem;
 }
