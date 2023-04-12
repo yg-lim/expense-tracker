@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const session = require("express-session");
 const flash = require("express-flash");
 const { body, validationResult } = require("express-validator");
+const LokiStore = require("connect-loki");
 
 const app = express();
 const PORT = config.PORT;
@@ -23,6 +24,7 @@ app.use(session({
   secret: config.SECRET,
   resave: false,
   saveUninitialized: true,
+  store: new LokiStore({}),
 }));
 app.use(flash());
 app.use((req, res, next) => {
@@ -144,7 +146,7 @@ app.post("/expenses/:year/:month",
 
 app.get("/expenses/edit/:expenseId",
   catchError((req, res) => {
-    
+
   })
 );
 
