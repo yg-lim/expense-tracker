@@ -21,6 +21,12 @@ app.use(morgan("common"));
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
+  cookie: {
+    httpOnly: true,
+    maxAge: 31 * 24 * 60 * 60 * 1000,
+    path: "/",
+    secure: false,
+  },
   secret: config.SECRET,
   resave: false,
   saveUninitialized: true,
