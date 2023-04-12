@@ -34,7 +34,7 @@ app.use(session({
 }));
 app.use(flash());
 app.use((req, res, next) => {
-  res.locals.store = new PgPersistence();
+  res.locals.store = new PgPersistence(req.session);
   res.locals.flash = req.session.flash;
   res.locals.signedIn = req.session.signedIn;
   res.locals.username = req.session.username;
@@ -85,7 +85,18 @@ const expenseFormValidation = [
     .withMessage("Expense must be for date in this month or earlier.")
 ];
 
-app.get("/", (req, res) => {
+const requiresAuthentication = (req, res, next) => {
+  if (!res.locals.signedIn) {
+    req.flash("error", "Please sign in.");
+    res.redirect("/signin");
+  } else {
+    next();
+  }
+};
+
+app.get("/", 
+  requiresAuthentication,
+  (req, res) => {
   let today = new Date();
   let year = today.getFullYear();
   let month = String(Number(today.getMonth()) + 1);
@@ -122,7 +133,9 @@ app.post("/signin",
   })
 );
 
-app.post("/signout", (req, res) => {
+app.post("/signout",
+  requiresAuthentication,
+  (req, res) => {
   delete req.session.signedIn;
   delete req.session.username;
   req.flash("info", "You have been signed out.");
@@ -130,6 +143,7 @@ app.post("/signout", (req, res) => {
 });
 
 app.get("/expenses/edit/:expenseId",
+  requiresAuthentication,
   catchError(async (req, res) => {
     let expenseId = req.params.expenseId;
 
@@ -150,6 +164,7 @@ app.get("/expenses/edit/:expenseId",
 );
 
 app.post("/expenses/edit/:expenseId",
+  requiresAuthentication,
   expenseFormValidation,
   catchError(async (req, res) => {
     let store = res.locals.store;
@@ -182,6 +197,7 @@ app.post("/expenses/edit/:expenseId",
 );
 
 app.post("/expenses/delete/:expenseId",
+  requiresAuthentication,
   catchError(async (req, res) => {
     let store = res.locals.store;
     let expenseId = req.params.expenseId;
@@ -200,6 +216,7 @@ app.post("/expenses/delete/:expenseId",
 );
 
 app.get("/expenses/:year/:month",
+  requiresAuthentication,
   catchError(async (req, res) => {
     let year = req.params.year;
     let month = req.params.month;
@@ -217,7 +234,8 @@ app.get("/expenses/:year/:month",
   })
 );
 
-app.post("/expenses/:year/:month", 
+app.post("/expenses/:year/:month",
+  requiresAuthentication,
   expenseFormValidation,
   catchError(async (req, res) => {
     let year = req.params.year;
